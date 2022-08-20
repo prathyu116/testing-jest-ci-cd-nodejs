@@ -1,0 +1,17 @@
+name: Run basic tests
+
+on: 
+  push:
+    branches:
+      - "tests"
+
+jobs:
+  run_jest_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with: 
+          node-version: 16
+      - run: yarn 
+      - run: yarn test
