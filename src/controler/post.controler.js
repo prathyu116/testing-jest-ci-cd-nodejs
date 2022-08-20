@@ -53,7 +53,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findByIdAndDelete(req.params.id).lean().exec();
 
-    return res.status(204).json({ message: "Deleted" });
+    return res.status(200).json({ message: "Deleted" });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
