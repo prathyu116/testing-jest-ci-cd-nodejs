@@ -4,14 +4,17 @@ const mongoose = require("mongoose");
 const supertest = require("supertest");
 
 beforeEach((done) => {
-  mongoose.connect("mongodb://localhost:27017/jesttest", { useNewUrlParser: true, useUnifiedTopology: true }, () => done());
+  mongoose.connect(
+    "mongodb+srv://prathyu:HVIrzkwgyPvPvqsu@cluster0.legmdpo.mongodb.net/?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => done()
+  );
 });
 afterEach((done) => {
   mongoose.connection.db.dropDatabase(() => {
     mongoose.connection.close(() => done());
   });
 });
-
 describe("posts CRUD", () => {
   test("GET - all posts", async () => {
     const post = await Post.create({ title: "Post 1", body: "Lorem ipsum" });
@@ -95,9 +98,7 @@ describe("posts CRUD", () => {
       .delete("/posts/" + post.id)
       .expect(204)
       .then(async (res) => {
-
         expect(await Post.findOne({ _id: post.id })).toBeFalsy();
-
       });
   });
 });
