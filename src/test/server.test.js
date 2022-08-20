@@ -4,7 +4,11 @@ const mongoose = require("mongoose");
 const supertest = require("supertest");
 
 beforeEach((done) => {
-  mongoose.connect("mongodb://localhost:27017/jesttest", { useNewUrlParser: true, useUnifiedTopology: true }, () => done());
+  mongoose.connect(
+    "mongodb+srv://prathyu:HVIrzkwgyPvPvqsu@cluster0.legmdpo.mongodb.net/?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => done()
+  );
 });
 afterEach((done) => {
   mongoose.connection.db.dropDatabase(() => {
